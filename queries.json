@@ -1,0 +1,8 @@
+{
+  "queries": [
+    {
+      "query_hash": "<some query hash>",
+      "frequency": "45m"
+    }
+  ]
+}
