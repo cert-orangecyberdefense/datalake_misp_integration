@@ -4,12 +4,12 @@
 
 ## Setting up the image
 ```shell
-# Build with:
-docker build -t misp_push .
+# Retrieve the image with:
+docker pull ocddev/datalake-misp-integration
 # Copy the template.env to .env and fill the value
 # Copy the template_queries.json to queries.json and fill the value
 # Then finally run the image with:
-docker run --env-file .env -v /path/to/queries.json:/code/queries.json misp_push
+docker run --env-file .env -v /path/to/queries.json:/code/queries.json ocddev/datalake-misp-integration
 ```
 
 ## Stopping the container
