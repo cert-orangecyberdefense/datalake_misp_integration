@@ -1,6 +1,7 @@
 import concurrent
 import timeit
 from typing import Iterable
+import concurrent.futures
 
 from pymisp import ExpandedPyMISP, MISPEvent
 
