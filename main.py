@@ -37,7 +37,7 @@ def job(query_hash):
             len(events_pushed),
             timeit.default_timer() - start_time,
         )
-    except:
+    except:  # noqa: E722
         logger.exception(f'Threats for query hash {query_hash} failed to be retrieved and injected into misp')
         raise
     finally:

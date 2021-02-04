@@ -18,4 +18,3 @@ OCD_DTL_QUERY_CONFIG_PATH = os.getenv('OCD_DTL_QUERY_CONFIG_PATH', 'queries.json
 
 OCD_DTL_MISP_WORKER = int(os.getenv('OCD_DTL_MISP_WORKER', 4))
 assert 0 < OCD_DTL_MISP_WORKER, incorrect_config_message
-

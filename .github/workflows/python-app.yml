@@ -1,0 +1,26 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Python application
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build the docker image
+        run: docker build -t misp_push .
+      - name: Run linter and test suite
+        run: docker run -t --entrypoint=/bin/bash misp_push -c "
+          pip install pytest flake8
+          && python -m flake8 . --count --max-complexity=10 --max-line-length=120 --show-source --statistics
+          && OCD_DTL_MISP_API_KEY='x' python -m pytest
+          "
