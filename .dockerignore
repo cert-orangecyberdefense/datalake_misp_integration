@@ -1,2 +1,6 @@
 .git
 .idea
+
+# Potential secrets
+.env
+template.env
