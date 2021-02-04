@@ -3,7 +3,7 @@ import timeit
 from typing import Iterable
 import concurrent.futures
 
-from pymisp import ExpandedPyMISP, MISPEvent
+import pymisp
 
 from src.config import OCD_DTL_MISP_HOST, OCD_DTL_MISP_API_KEY, OCD_DTL_MISP_USE_SSL, OCD_DTL_MISP_WORKER
 from src.logger import logger
@@ -14,7 +14,7 @@ from src.wrappers import ignore
 class Misp:
 
     def __init__(self):
-        self.misp_backend = ExpandedPyMISP(
+        self.misp_backend = pymisp.ExpandedPyMISP(
             OCD_DTL_MISP_HOST,
             OCD_DTL_MISP_API_KEY,
             ssl=OCD_DTL_MISP_USE_SSL,
@@ -27,7 +27,7 @@ class Misp:
     @ignore(Exception, message='Skipping event insertion in misp since an error occurred')
     def add_event(self, event: DtlMispEvent):
         """Add a new event into the misp. If the event already exist, it is ignored"""
-        misp_event = MISPEvent()
+        misp_event = pymisp.MISPEvent()
         misp_event.load(event)
         if not self.misp_backend.event_exists(misp_event):
             return self.misp_backend.add_event(misp_event, pythonify=True)

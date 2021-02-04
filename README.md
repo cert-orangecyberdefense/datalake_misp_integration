@@ -27,3 +27,7 @@ Then build and run the image with:
 ```shell
 docker build -t misp_push . && docker run --env-file .env --net=host misp_push
 ```
+
+## Running tests
+Install pytest with: `pip install pytest`  
+Then run: `OCD_DTL_MISP_API_KEY='x' python -m pytest`
