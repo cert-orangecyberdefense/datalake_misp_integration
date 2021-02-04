@@ -14,9 +14,6 @@ WORKDIR /code
 
 ADD ./requirements.txt /code/requirements.txt
 
-# TODO Remove once pushed on the official pypi
-RUN pip install -i https://test.pypi.org/simple/  --no-warn-script-location datalake-scripts==1.23a0
-
 RUN pip install --no-warn-script-location -r requirements.txt
 
 ADD . /code

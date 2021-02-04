@@ -81,7 +81,7 @@ def register_jobs(jobs_config_path):
             raise ValueError(f'Config expect a frequency: <x>[s|m|h], got {frequency}')
 
     if len(query_hashes) == 0:
-        raise ValueError(f'No query found')
+        raise ValueError('No query found')
     next_run: datetime.timedelta = schedule.next_run() - datetime.datetime.now()
     logger.info('Loaded %s queries with success, next run in %1.0f s', len(query_hashes), next_run.total_seconds())
 
