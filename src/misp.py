@@ -1,4 +1,3 @@
-import asyncio
 import concurrent
 import timeit
 from typing import Iterable
@@ -20,7 +19,6 @@ class Misp:
             ssl=OCD_DTL_MISP_USE_SSL,
             timeout=60,
         )
-        self.loop = asyncio.get_event_loop()
 
         # Init a common thread pool to run sync operation in background
         self.thread_pool = concurrent.futures.ThreadPoolExecutor(max_workers=OCD_DTL_MISP_WORKER)
@@ -33,25 +31,29 @@ class Misp:
         if not self.misp_backend.event_exists(misp_event):
             return self.misp_backend.add_event(misp_event, pythonify=True)
 
-    async def _add_event(self, event):
-        return await self.loop.run_in_executor(self.thread_pool, self.add_event, event)
-
     def add_events(self, events: Iterable):
         """Add events in batch by calling add_event"""
-        self.loop.run_until_complete(self._add_events(events))
-
-    async def _add_events(self, events: Iterable):
         start_time = timeit.default_timer()
-        tasks = []
 
-        for event in events:
-            tasks.append(self._add_event(event))
+        if not self.thread_pool:
+            logger.warning('Add events called while misp is already shutdown')
+            return  # close() has already been called
 
-        res = await asyncio.gather(*tasks)
+        # Use the thread_pool to perform several insertion in parallel
+        results = []
+        futures = [self.thread_pool.submit(self.add_event, event=event) for event in events]
+        for future in concurrent.futures.as_completed(futures):
+            results.append(future.result())
 
         logger.debug(
             'MISP: Done with the insertion of %s events, after %1.2fs',
             len(events),
             timeit.default_timer() - start_time,
         )
-        return res
+        return results
+
+    def close(self):
+        """Close the misp connection by finishing to push events marked for insertion"""
+        logger.warning('Gracefully shutting down the misp connector')
+        self.thread_pool.shutdown(wait=True)
+        self.thread_pool = None

@@ -21,4 +21,4 @@ RUN pip install --no-warn-script-location -r requirements.txt
 
 ADD . /code
 
-CMD python main.py
+ENTRYPOINT ["python", "main.py"]

@@ -12,15 +12,17 @@ from src.config import OCD_DTL_QUERY_CONFIG_PATH
 from src.datalake import Datalake
 from src.logger import configure_logging, logger
 from src.misp import Misp
+from src.signal_manager import SignalManager
 from src.types import DtlMispEvent
 
 
-configure_logging(logging.INFO)
+configure_logging(logging.DEBUG)
+
 datalake = Datalake()
 misp = Misp()
-jobs_running = set()
+signal_manager = SignalManager()
 
-hash_running = []
+jobs_running = set()
 
 
 def job(query_hash):
@@ -86,6 +88,8 @@ def register_jobs(jobs_config_path):
 
 register_jobs(OCD_DTL_QUERY_CONFIG_PATH)
 
-while 1:
+while not signal_manager.is_stop_requested:
     schedule.run_pending()
     sleep(1)
+
+misp.close()
