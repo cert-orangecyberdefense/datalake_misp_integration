@@ -1,0 +1,5 @@
+.idea
+
+# Files resulting from the templates
+.env
+queries.json
