@@ -1,8 +1,16 @@
 {
   "queries": [
     {
-      "query_hash": "<some query hash>",
+      "query_hash": "<query hash 1>",
+      "frequency": "2h"
+    },
+    {
+      "query_hash": "<query hash 2>",
       "frequency": "45m"
+    },
+    {
+      "query_hash": "<query hash 3>",
+      "frequency": "30s"
     }
   ]
 }

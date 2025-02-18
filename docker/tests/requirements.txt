@@ -1,0 +1,4 @@
+pytest
+pytest-mock
+datalake-scripts==3.0.0rc3
+pymisp[fileobjects]==2.5.4

@@ -12,7 +12,7 @@ USER pythonuser
 
 WORKDIR /code
 
-ADD ./requirements.txt /code/requirements.txt
+COPY docker/local_misp_connector/requirements.txt /code/requirements.txt
 
 RUN pip install --upgrade pip
 RUN pip install --no-warn-script-location -r requirements.txt
