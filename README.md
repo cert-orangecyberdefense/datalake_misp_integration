@@ -22,7 +22,7 @@ docker stop -t 120 <container_name>
 ## Testing the image with a local misp
 
 Set up a local misp by following [the instruction of this repo](https://github.com/MISP/misp-docker#building-your-image)  
-Set the env variable `OCD_DTL_MISP_HOST` to `localhost` and get the API key here: http://localhost/events/automation for `OCD_DTL_MISP_API_KEY`  
+Set the env variable `OCD_DTL_MISP_HOST` to `localhost` and get the API key here: https://localhost/events/automation for `OCD_DTL_MISP_API_KEY`  
 Then build and run the image with:
 ```shell
 docker build -t misp_push . && docker run --env-file .env --net=host misp_push

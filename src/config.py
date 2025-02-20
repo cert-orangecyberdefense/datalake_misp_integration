@@ -9,8 +9,8 @@ assert OCD_DTL_API_ENV in ('prod', 'preprod'), incorrect_config_message
 OCD_DTL_MISP_MAX_RESULT = int(os.getenv('OCD_DTL_MISP_MAX_RESULT', 1000))
 assert 0 < OCD_DTL_MISP_MAX_RESULT <= 5000, incorrect_config_message
 
-OCD_DTL_MISP_HOST = os.getenv('OCD_DTL_MISP_HOST', 'http://localhost/')
-OCD_DTL_MISP_HOST = OCD_DTL_MISP_HOST if '://' in OCD_DTL_MISP_HOST else 'http://' + OCD_DTL_MISP_HOST
+OCD_DTL_MISP_HOST = os.getenv('OCD_DTL_MISP_HOST', 'https://localhost/')
+OCD_DTL_MISP_HOST = OCD_DTL_MISP_HOST if '://' in OCD_DTL_MISP_HOST else 'https://' + OCD_DTL_MISP_HOST
 OCD_DTL_MISP_API_KEY = os.getenv('OCD_DTL_MISP_API_KEY')
 assert OCD_DTL_MISP_API_KEY, incorrect_config_message
 

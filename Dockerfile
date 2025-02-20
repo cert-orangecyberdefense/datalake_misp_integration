@@ -1,4 +1,4 @@
-FROM python:3.8-slim-buster
+FROM python:3.9-slim-buster
 
 # System deps:
 RUN apt-get update \
@@ -14,6 +14,7 @@ WORKDIR /code
 
 ADD ./requirements.txt /code/requirements.txt
 
+RUN pip install --upgrade pip
 RUN pip install --no-warn-script-location -r requirements.txt
 
 ADD . /code
