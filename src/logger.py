@@ -2,7 +2,7 @@ import logging
 
 logger = logging.getLogger("OCD_MISP")
 
-LOG_FORMAT = '%(name)s:%(levelname)-4s %(message)s'
+LOG_FORMAT = "%(name)s:%(levelname)-4s %(message)s"
 
 
 def configure_logging(loglevel: int):

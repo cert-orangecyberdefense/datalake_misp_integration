@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build the docker image
-        run: docker build -t misp_push .
+        run: docker build -t misp_push -f docker/local_misp_connector/Dockerfile .
       - name: Run linter and test suite
         run: docker run -t --entrypoint=/bin/bash misp_push -c "
           pip install pytest flake8

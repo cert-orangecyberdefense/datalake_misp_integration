@@ -1,0 +1,11 @@
+services:
+  misp_push:
+    build: 
+      context: ../..
+      dockerfile: docker/local_misp_connector/Dockerfile
+    container_name: misp_push
+    env_file: ../../.env
+    network_mode: "host"
+    restart: unless-stopped
+    working_dir: /code
+    entrypoint: ["python", "main.py"]

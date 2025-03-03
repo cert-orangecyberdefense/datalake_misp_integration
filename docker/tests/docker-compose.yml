@@ -1,0 +1,17 @@
+services:
+  test_runner:
+    build:
+      context: ../..
+      dockerfile: docker/tests/Dockerfile
+    container_name: test_runner
+    env_file: .env.test
+    working_dir: /code
+    environment:
+      - PYTHONPATH=/code
+    entrypoint: ["python", "-m", "pytest"]
+    volumes:
+      - type: bind
+        source: ../..
+        target: /code
+      - type: volume
+        target: /pytest_cache

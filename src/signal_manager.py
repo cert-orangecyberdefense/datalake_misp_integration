@@ -5,6 +5,7 @@ class SignalManager:
     """
     Listen to sigterm signal (via `kill -SIGTERM pid`) to toggle is_stop_requested
     """
+
     is_stop_requested = False
 
     def __init__(self):
