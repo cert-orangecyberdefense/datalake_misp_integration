@@ -3,3 +3,7 @@
 # Files resulting from the templates
 .env
 queries.json
+
+# Pytest cache files
+src/__pycache__
+tests/__pycache__
